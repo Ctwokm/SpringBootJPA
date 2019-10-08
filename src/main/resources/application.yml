@@ -1,0 +1,26 @@
+spring:
+  #数据库连接的相关配置信息
+  datasource:
+    #简写版
+    url: jdbc:mysql://localhost:3306/testjpa?characterEncoding=utf8
+    #完整版，各种限定
+    #url: jdbc:mysql://localhost:3306/testjpa?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false
+    username: root
+    password: admin
+  jpa:
+    #选择的数据库
+    database: mysql
+    #是否显示sql语句
+    show-sql: true
+    #Hibernate ddl auto (validate|create|create-drop|update)
+    #create：每次运行程序时，都会重新创建表，故而数据会丢失
+    #create-drop：每次运行程序时会先创建表结构，然后待程序结束时清空表
+    #upadte：每次运行程序，没有表时会创建表，如果对象发生改变会更新表结构，原有数据不会清空，只会更新（推荐使用）
+    #validate：运行程序会校验数据与数据库的字段类型是否相同，字段不同会报错
+    #none: 禁用DDL处理
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
