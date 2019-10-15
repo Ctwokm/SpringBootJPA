@@ -49,13 +49,16 @@ public class MysqlTest {
 
 	@Before
 	public void initData() {
+		//先清空所有的表
 		userRepository.deleteAll();
 		roleRepository.deleteAll();
 		departmentRepository.deleteAll();
-
+		
+		//插入部门
 		Department department = new Department();
 		department.setName("开发部");
 		departmentRepository.save(department);
+		//断言id不为空，如果是空抛出异常
 		Assert.assertNotNull(department.getId());
 
 		Role role = new Role();
@@ -64,13 +67,21 @@ public class MysqlTest {
 		Assert.assertNotNull(role.getId());
 
 		User user = new User();
+		//为用户添加名称
 		user.setName("user");
+		//为用户添加创建日期
 		user.setCreateDate(new Date());
+		//为用户添加所在部门
 		user.setDepartment(department);
+		//查询所有角色
 		List<Role> roles = roleRepository.findAll();
+		//断言角色不为空
 		Assert.assertNotNull(roles);
+		//将所有角色添加给用户
 		user.setRoles(roles);
+		//保存
 		userRepository.save(user);
+		//断言id不为空，不为空说明保存成功，否则抛出异常
 		Assert.assertNotNull(user.getId());
 	}
 
